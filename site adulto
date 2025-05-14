@@ -1,286 +1,182 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Elegance Club</title>
-    <style>
-        :root {
-            --primary-color: #8b0000;
-            --secondary-color: #333;
-            --accent-color: #d4af37;
-            --text-light: #f5f5f5;
-            --text-dark: #222;
-        }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Arial', sans-serif;
-        }
-        
-        body {
-            background-color: #111;
-            color: var(--text-light);
-            overflow-x: hidden;
-        }
-        
-        .age-gate {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.9);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-        }
-        
-        .age-gate-content {
-            background: var(--secondary-color);
-            padding: 2rem;
-            border-radius: 8px;
-            text-align: center;
-            max-width: 500px;
-            border: 1px solid var(--accent-color);
-        }
-        
-        .age-gate h1 {
-            color: var(--accent-color);
-            margin-bottom: 1rem;
-        }
-        
-        .age-gate p {
-            margin-bottom: 1.5rem;
-            line-height: 1.6;
-        }
-        
-        .age-buttons {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-        }
-        
-        .age-btn {
-            padding: 0.8rem 1.5rem;
-            border: none;
-            border-radius: 4px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .enter-btn {
-            background-color: var(--accent-color);
-            color: var(--text-dark);
-        }
-        
-        .exit-btn {
-            background-color: var(--primary-color);
-            color: var(--text-light);
-        }
-        
-        .age-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        }
-        
-        header {
-            background: linear-gradient(to right, #000, var(--primary-color), #000;
-            padding: 1rem 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
-        }
-        
-        .logo {
-            font-size: 2rem;
-            font-weight: bold;
-            color: var(--accent-color);
-            text-decoration: none;
-        }
-        
-        nav ul {
-            display: flex;
-            list-style: none;
-            gap: 2rem;
-        }
-        
-        nav a {
-            color: var(--text-light);
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s;
-            position: relative;
-        }
-        
-        nav a:hover {
-            color: var(--accent-color);
-        }
-        
-        nav a::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: -4px;
-            left: 0;
-            background-color: var(--accent-color);
-            transition: width 0.3s;
-        }
-        
-        nav a:hover::after {
-            width: 100%;
-        }
-        
-        .hero {
-            height: 80vh;
-            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://source.unsplash.com/random/1920x1080/?luxury,night') no-repeat center center/cover;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 0 2rem;
-        }
-        
-        .hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
-            color: var(--accent-color);
-        }
-        
-        .hero p {
-            font-size: 1.2rem;
-            max-width: 700px;
-            margin-bottom: 2rem;
-        }
-        
-        .cta-btn {
-            padding: 1rem 2.5rem;
-            background-color: var(--primary-color);
-            color: var(--text-light);
-            border: none;
-            border-radius: 30px;
-            font-size: 1.1rem;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s;
-            text-decoration: none;
-            display: inline-block;
-        }
-        
-        .cta-btn:hover {
-            background-color: var(--accent-color);
-            color: var(--text-dark);
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
-        }
-        
-        .content-blur {
-            filter: blur(8px);
-            pointer-events: none;
-            user-select: none;
-        }
-        
-        footer {
-            background-color: var(--secondary-color);
-            padding: 2rem;
-            text-align: center;
-            margin-top: 2rem;
-        }
-        
-        .footer-links {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            margin-bottom: 1.5rem;
-        }
-        
-        .footer-links a {
-            color: var(--text-light);
-            text-decoration: none;
-        }
-        
-        .footer-links a:hover {
-            color: var(--accent-color);
-        }
-        
-        .copyright {
-            color: #777;
-            font-size: 0.9rem;
-        }
-    </style>
-</head>
-<body>
-    <div class="age-gate">
-        <div class="age-gate-content">
-            <h1>Bem-vindo ao Elegance Club</h1>
-            <p>Este site contém conteúdo exclusivo para adultos. Você deve ter 18 anos ou mais para acessar.</p>
-            <p>Ao entrar, você confirma que é maior de idade e aceita nossos Termos de Serviço e Política de Privacidade.</p>
-            <div class="age-buttons">
-                <button class="age-btn enter-btn" onclick="enterSite()">Entrar</button>
-                <button class="age-btn exit-btn" onclick="exitSite()">Sair</button>
+import React from 'react';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { Search, Star, MessageSquare } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import Navbar from '@/components/Navbar';
+import Footer from '@/components/Footer';
+
+const featuredRequests = [
+  {
+    id: 1,
+    title: 'Sessão de fotos temática',
+    description: 'Procuro alguém para uma sessão de fotos com tema vintage anos 50',
+    price: 150,
+    category: 'Fotografia',
+    votes: 12,
+    comments: 3
+  },
+  {
+    id: 2,
+    title: 'Pesquisa sobre preferências',
+    description: 'Preciso de participantes para responder questionário anônimo sobre preferências pessoais',
+    price: 80,
+    category: 'Pesquisa',
+    votes: 8,
+    comments: 5
+  },
+  {
+    id: 3,
+    title: 'Acompanhante para evento',
+    description: 'Busco pessoa discreta para acompanhar em festa corporativa',
+    price: 200,
+    category: 'Eventos',
+    votes: 15,
+    comments: 7
+  },
+];
+
+const Index = () => {
+  return (
+    <div className="min-h-screen bg-feticheiro-rosa bg-opacity-20">
+      <Navbar />
+      
+      <main className="container mx-auto px-4 py-8">
+        {/* Hero Section */}
+        <section className="py-16 text-center">
+          <div className="max-w-3xl mx-auto">
+            <h1 className="text-4xl md:text-5xl font-bold mb-4 text-feticheiro-vermelho">
+              Seus desejos, suas regras
+            </h1>
+            <p className="text-xl mb-8 text-feticheiro-cinzaTexto">
+              O lugar discreto para encontrar o que procura. Publique seus pedidos ou 
+              navegue pelas solicitações disponíveis na sua cidade.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Button className="bg-feticheiro-vermelho hover:bg-feticheiro-vermelhoEscuro">
+                Publicar Pedido
+              </Button>
+              <Button variant="outline" className="border-feticheiro-vermelho text-feticheiro-vermelho hover:bg-feticheiro-rosa">
+                Explorar Pedidos
+              </Button>
             </div>
-        </div>
-    </div>
-    
-    <div id="main-content" class="content-blur">
-        <header>
-            <a href="#" class="logo">ELEGANCE</a>
-            <nav>
-                <ul>
-                    <li><a href="#">Início</a></li>
-                    <li><a href="#">Modelos</a></li>
-                    <li><a href="#">Galeria</a></li>
-                    <li><a href="#">Eventos</a></li>
-                    <li><a href="#">Contato</a></li>
-                </ul>
-            </nav>
-        </header>
-        
-        <section class="hero">
-            <h1>Experiências Sofisticadas para Adultos</h1>
-            <p>Descubra um mundo de elegância e sensualidade projetado para os gostos mais refinados.</p>
-            <a href="#" class="cta-btn">Explore o Clube</a>
+          </div>
+        </section>
+
+        {/* Pesquisa */}
+        <section className="mb-12">
+          <div className="bg-white rounded-xl shadow-lg p-6 max-w-2xl mx-auto">
+            <div className="relative">
+              <Search className="absolute left-4 top-3 text-gray-400" />
+              <input 
+                type="text" 
+                placeholder="Buscar por categoria, cidade ou palavra-chave..." 
+                className="pl-12 pr-4 py-2 rounded-lg w-full border border-feticheiro-rosa focus:outline-none focus:ring-2 focus:ring-feticheiro-vermelho"
+              />
+            </div>
+          </div>
+        </section>
+
+        {/* Featured Requests */}
+        <section className="mb-12">
+          <div className="mb-8">
+            <h2 className="text-2xl font-bold text-feticheiro-vermelho mb-2">Pedidos em Destaque</h2>
+            <p className="text-feticheiro-cinzaTexto">Descubra os pedidos mais populares na sua região</p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {featuredRequests.map((request) => (
+              <Card key={request.id} className="hover-scale border-feticheiro-rosa">
+                <CardHeader className="pb-3">
+                  <div className="flex justify-between items-start">
+                    <CardTitle className="text-feticheiro-vermelho">{request.title}</CardTitle>
+                    <Badge className="bg-feticheiro-vermelho">{request.category}</Badge>
+                  </div>
+                  <CardDescription className="text-feticheiro-cinzaTexto">
+                    {request.description}
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-2xl font-bold text-feticheiro-vermelho">
+                    R$ {request.price}
+                  </p>
+                </CardContent>
+                <CardFooter className="flex justify-between pt-3 border-t border-feticheiro-rosa">
+                  <div className="flex items-center gap-3 text-sm text-feticheiro-cinzaTexto">
+                    <span className="flex items-center">
+                      <Star className="h-4 w-4 mr-1 text-feticheiro-vermelho" />
+                      {request.votes}
+                    </span>
+                    <span className="flex items-center">
+                      <MessageSquare className="h-4 w-4 mr-1 text-feticheiro-vermelho" />
+                      {request.comments}
+                    </span>
+                  </div>
+                  <Button size="sm" className="bg-feticheiro-vermelho hover:bg-feticheiro-vermelhoEscuro">
+                    Ver detalhes
+                  </Button>
+                </CardFooter>
+              </Card>
+            ))}
+          </div>
+          
+          <div className="text-center mt-8">
+            <Button variant="outline" className="border-feticheiro-vermelho text-feticheiro-vermelho hover:bg-feticheiro-rosa">
+              Ver mais pedidos
+            </Button>
+          </div>
+        </section>
+
+        {/* Como funciona */}
+        <section className="mb-12 bg-white rounded-xl shadow-lg p-8">
+          <h2 className="text-2xl font-bold text-feticheiro-vermelho mb-6 text-center">Como Funciona</h2>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="text-center">
+              <div className="w-16 h-16 bg-feticheiro-rosa rounded-full flex items-center justify-center mx-auto mb-4">
+                <span className="text-2xl font-bold text-feticheiro-vermelho">1</span>
+              </div>
+              <h3 className="text-lg font-bold mb-2 text-feticheiro-vermelho">Crie seu perfil anônimo</h3>
+              <p className="text-feticheiro-cinzaTexto">Registre-se com um pseudônimo e personalize seu perfil mantendo sua identidade em sigilo</p>
+            </div>
+            
+            <div className="text-center">
+              <div className="w-16 h-16 bg-feticheiro-rosa rounded-full flex items-center justify-center mx-auto mb-4">
+                <span className="text-2xl font-bold text-feticheiro-vermelho">2</span>
+              </div>
+              <h3 className="text-lg font-bold mb-2 text-feticheiro-vermelho">Publique seus desejos</h3>
+              <p className="text-feticheiro-cinzaTexto">Descreva o que você procura, defina um valor e aguarde as propostas</p>
+            </div>
+            
+            <div className="text-center">
+              <div className="w-16 h-16 bg-feticheiro-rosa rounded-full flex items-center justify-center mx-auto mb-4">
+                <span className="text-2xl font-bold text-feticheiro-vermelho">3</span>
+              </div>
+              <h3 className="text-lg font-bold mb-2 text-feticheiro-vermelho">Encontre a pessoa ideal</h3>
+              <p className="text-feticheiro-cinzaTexto">Filtre as respostas, escolha quem mais combina com você e faça contato de forma segura</p>
+            </div>
+          </div>
         </section>
         
-        <footer>
-            <div class="footer-links">
-                <a href="#">Termos de Serviço</a>
-                <a href="#">Política de Privacidade</a>
-                <a href="#">DMCA</a>
-                <a href="#">2257 Declaração</a>
-                <a href="#">Contato</a>
-            </div>
-            <p class="copyright">© 2023 Elegance Club. Todos os direitos reservados.</p>
-        </footer>
+        {/* CTA */}
+        <section className="mb-12">
+          <div className="fetiche-gradient rounded-xl shadow-lg p-8 text-center">
+            <h2 className="text-3xl font-bold text-white mb-4">Pronto para começar?</h2>
+            <p className="text-white text-lg mb-6 max-w-2xl mx-auto">
+              Junte-se à comunidade exclusiva da nossa cidade. Ambiente discreto e controlado para 
+              realizar seus desejos com segurança e privacidade.
+            </p>
+            <Button className="bg-white text-feticheiro-vermelho hover:bg-feticheiro-rosa">
+              Criar Conta Gratuita
+            </Button>
+          </div>
+        </section>
+      </main>
+
+      <Footer />
     </div>
-    
-    <script>
-        function enterSite() {
-            document.querySelector('.age-gate').style.display = 'none';
-            document.getElementById('main-content').classList.remove('content-blur');
-        }
-        
-        function exitSite() {
-            window.location.href = 'https://www.google.com';
-        }
-        
-        // Simulação de verificação de cookies para idade
-        document.addEventListener('DOMContentLoaded', function() {
-            const ageVerified = localStorage.getItem('ageVerified');
-            
-            if (ageVerified === 'true') {
-                document.querySelector('.age-gate').style.display = 'none';
-                document.getElementById('main-content').classList.remove('content-blur');
-            }
-        });
-    </script>
-</body>
-</html>
+  );
+};
+
+export default Index; 
